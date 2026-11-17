@@ -1,0 +1,205 @@
+/* Identidade Visual GotaCerta */
+:root {
+  --gc-teal: #087F78;
+  --gc-teal-hover: #06635E;
+  --gc-verde-escuro: #17483E;
+  --gc-verde-apoio: #4A625A;
+  --gc-verde-folha: #B6D96A;
+  --gc-creme: #F7F8F1;
+  --gc-branco: #FFFFFF;
+  --gc-borda: #B6D96A;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--gc-creme);
+  color: var(--gc-verde-escuro);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Tipografia: Playfair Display SC para Logo e Títulos Principais */
+.gc-brand-text,
+.gc-titulo-principal {
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 700;
+  color: var(--gc-verde-escuro);
+}
+
+/* Navbar */
+.gc-navbar {
+  background-color: var(--gc-branco);
+  border-bottom: 1px solid var(--gc-borda);
+}
+
+.gc-navbar .nav-link {
+  color: var(--gc-verde-apoio);
+  font-weight: 600;
+}
+
+.gc-navbar .nav-link.active,
+.gc-navbar .nav-link:hover {
+  color: var(--gc-teal);
+}
+
+/* Botões e Destaques */
+.gc-btn-primario {
+  background-color: var(--gc-teal);
+  color: var(--gc-branco);
+  font-weight: 700;
+  border: none;
+}
+
+.gc-btn-primario:hover {
+  background-color: var(--gc-teal-hover);
+  color: var(--gc-branco);
+}
+
+.gc-btn-secundario {
+  background-color: transparent;
+  color: var(--gc-teal);
+  border: 1.5px solid var(--gc-teal);
+  font-weight: 700;
+}
+
+.gc-btn-secundario:hover {
+  background-color: var(--gc-teal);
+  color: var(--gc-branco);
+}
+
+.gc-label-apoio {
+  color: var(--gc-verde-apoio);
+}
+
+/* Caixas e Cards */
+.gc-painel-box,
+.gc-card {
+  background-color: var(--gc-branco);
+  border: 1px solid var(--gc-borda);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.gc-card {
+  padding: 0;
+}
+
+.gc-card-alerta {
+  border: 1.5px solid #D97706;
+}
+
+.gc-alerta-faixa {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border-left: 3px solid #D97706;
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.gc-aviso-simulacao {
+  background-color: #E8F2EE;
+  border-left: 4px solid var(--gc-teal);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.gc-aviso-lgpd {
+  background-color: var(--gc-creme);
+  padding: 0.65rem;
+  border-radius: 8px;
+  color: var(--gc-verde-apoio);
+}
+
+.gc-metrica {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--gc-teal);
+}
+
+/* =========================================================
+   MOBILE (360px / 390px - Base Mobile First)
+   ========================================================= */
+.gc-hero-vazio {
+  background-color: var(--gc-branco);
+  border: 1px solid var(--gc-borda);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.gc-grid-resumo,
+.gc-grid-canteiros,
+.gc-layout-canteiros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Badges de Bomba */
+.gc-badge-ligada {
+  background-color: var(--gc-verde-folha);
+  color: var(--gc-verde-escuro);
+  font-weight: 800;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.gc-badge-desligada {
+  background-color: #E9ECEF;
+  color: var(--gc-verde-apoio);
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.gc-footer {
+  background-color: var(--gc-branco);
+  border-top: 1px solid var(--gc-borda);
+}
+
+/* TABLET (768px) */
+@media (min-width: 768px) {
+  .gc-hero-vazio {
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+    padding: 2.5rem;
+  }
+
+  .gc-grid-resumo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gc-grid-canteiros {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP (1280px) */
+
+@media (min-width: 1280px) {
+  .gc-layout-canteiros {
+    grid-template-columns: 360px 1fr;
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .gc-grid-canteiros {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
