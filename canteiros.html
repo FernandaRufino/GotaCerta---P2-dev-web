@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GotaCerta — Gerenciar Canteiros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md gc-navbar" aria-label="Navegação principal">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="Img/Logo - GotaCerta.png" alt="GotaCerta" height="50" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto gap-md-3">
+            <li class="nav-item"><a class="nav-link" href="index.html">Painel</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="canteiros.html">Canteiros</a></li>
+            <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container my-4">
+    <h1 class="h3 mb-4 gc-titulo-principal">Gerenciamento de Canteiros</h1>
+
+    <div id="feedback-operacao" class="alert d-none" role="alert"></div>
+
+    <!-- Layout Desktop: Formulário à esquerda | Importação e Lista à direita -->
+    <div class="gc-layout-canteiros">
+      
+      <!-- Coluna Esquerda: Formulário Principal -->
+      <section class="gc-painel-box" aria-labelledby="titulo-form">
+        <h2 id="titulo-form" class="h5 mb-3">Cadastrar Canteiro</h2>
+        <form id="form-canteiro" novalidate>
+          <input type="hidden" id="canteiro-id">
+
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome do Canteiro *</label>
+            <input type="text" class="form-control" id="nome" name="nome" required minlength="3" maxlength="40" placeholder="Ex.: Canteiro Norte 01">
+            <div class="invalid-feedback" id="erro-nome"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="cultura" class="form-label">Cultura / Hortaliça *</label>
+            <input type="text" class="form-control" id="cultura" name="cultura" required minlength="3" maxlength="30" placeholder="Ex.: Alface Crespa">
+            <div class="invalid-feedback" id="erro-cultura"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="umidadeAtual" class="form-label">Umidade Inicial Simulada (%) *</label>
+            <input type="number" class="form-control" id="umidadeAtual" name="umidadeAtual" required min="0" max="100" step="1" placeholder="0 a 100">
+            <div class="invalid-feedback" id="erro-umidadeAtual"></div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label for="limiteMin" class="form-label">Limite Mínimo (%) *</label>
+              <input type="number" class="form-control" id="limiteMin" name="limiteMin" required min="0" max="99" step="1" placeholder="Ex.: 40">
+              <div class="invalid-feedback" id="erro-limiteMin"></div>
+            </div>
+            <div class="col-6">
+              <label for="limiteMax" class="form-label">Limite Máximo (%) *</label>
+              <input type="number" class="form-control" id="limiteMax" name="limiteMax" required min="1" max="100" step="1" placeholder="Ex.: 75">
+              <div class="invalid-feedback" id="erro-limiteMax"></div>
+            </div>
+          </div>
+
+          <p class="gc-aviso-lgpd small mb-3">
+            <strong>Privacidade (LGPD):</strong> Este sistema não coleta dados pessoais. Informe apenas identificadores técnicos dos canteiros (dados fictícios ou operacionais).
+          </p>
+
+          <div class="d-flex gap-2">
+            <button type="submit" id="btn-salvar" class="btn gc-btn-primario flex-grow-1">Salvar Canteiro</button>
+            <button type="button" id="btn-cancelar-edicao" class="btn gc-btn-secundario d-none">Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Coluna Direita: Importação de PDF e Lista de Canteiros -->
+      <div class="d-flex flex-column gap-4">
+        
+        <section class="gc-painel-box" aria-labelledby="titulo-importar">
+          <h2 id="titulo-importar" class="h5 mb-2">Importar Canteiros via PDF</h2>
+          <p class="gc-label-apoio small mb-3">
+            Selecione um PDF (até 5 MB) contendo tabela com as colunas: <em>Nome, Cultura, Umidade atual, Limite mínimo e Limite máximo</em>. O arquivo é lido localmente no seu navegador.
+          </p>
+          <div class="d-flex flex-wrap gap-2 align-items-center">
+            <label for="input-pdf" class="visually-hidden">Escolher arquivo PDF</label>
+            <input type="file" id="input-pdf" class="form-control" accept="application/pdf">
+          </div>
+          <div id="status-pdf" class="small mt-2" aria-live="polite"></div>
+        </section>
+
+        <section aria-labelledby="titulo-lista">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 id="titulo-lista" class="h5 mb-0">Canteiros Cadastrados</h2>
+            <span id="contador-lista" class="badge bg-secondary">0 itens</span>
+          </div>
+
+          <div id="estado-vazio-lista" class="gc-painel-box text-center py-4">
+            <p class="mb-1 fw-bold">Nenhum canteiro cadastrado ainda</p>
+            <p class="gc-label-apoio small mb-0">Utilize o formulário ao lado ou importe um PDF para começar.</p>
+          </div>
+
+          <div id="lista-canteiros" class="gc-grid-canteiros"></div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="gc-footer mt-5 py-4">
+    <div class="container text-center">
+      <p class="mb-1"><strong>GotaCerta</strong> — Tecnologia Cidadã para Agricultura Familiar</p>
+      <p class="gc-label-apoio small mb-0">Projeto acadêmico · FATEC Diadema · DSM · 2026</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/registro.js"></script>
+  <script src="js/validacao.js"></script>
+  <script src="js/importar-pdf.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

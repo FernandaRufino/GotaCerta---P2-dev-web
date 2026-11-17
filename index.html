@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GotaCerta — Painel de Irrigação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md gc-navbar" aria-label="Navegação principal">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="Img/Logo - GotaCerta.png" alt="GotaCerta" height="50" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto gap-md-3">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Painel</a></li>
+            <li class="nav-item"><a class="nav-link" href="canteiros.html">Canteiros</a></li>
+            <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container my-4">
+    <div class="gc-aviso-simulacao mb-4" role="status">
+      <strong>Ambiente de Simulação:</strong> Os valores de umidade e o acionamento das bombas são simulados pelo navegador para apoio ao manejo. Nenhum sensor físico está conectado.
+    </div>
+
+    <div id="alerta-erro-global" class="alert alert-danger d-none" role="alert"></div>
+
+    <!-- Estado Vazio (Hero) -->
+    <section id="estado-vazio-painel" class="gc-hero-vazio">
+      <div class="gc-hero-texto">
+        <h1 class="gc-titulo-principal">Manejo de irrigação simples para o pequeno produtor</h1>
+        <p>Cadastre seus canteiros manualmente ou importe uma tabela em PDF para simular a umidade do solo e automatizar o acionamento da bomba com base nos limites de cada cultura.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <a href="canteiros.html" class="btn gc-btn-primario">Cadastrar Canteiros</a>
+          <a href="sobre.html" class="btn gc-btn-secundario">Entender como funciona</a>
+        </div>
+      </div>
+      <img src="img/Simbulo - GotaCerta.png" alt="GotaCerta" height="100" class="d-inline-block align-text-top">
+    </section>
+
+    <!-- Conteúdo quando há canteiros -->
+    <section id="conteudo-painel" class="d-none" aria-label="Resumo da operação">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h1 class="h3 mb-0 gc-titulo-principal">Resumo dos Canteiros</h1>
+        <button type="button" id="btn-simular-ciclo" class="btn gc-btn-primario">Simular Leitura de Umidade</button>
+      </div>
+
+      <!-- Grid de 3 cards no Tablet/Desktop -->
+      <div class="gc-grid-resumo mb-4">
+        <div class="card gc-card">
+          <div class="card-body">
+            <span class="gc-label-apoio">Total de Canteiros</span>
+            <p class="gc-metrica mb-0" id="resumo-total">0</p>
+          </div>
+        </div>
+        <div class="card gc-card">
+          <div class="card-body">
+            <span class="gc-label-apoio">Bombas Ligadas</span>
+            <p class="gc-metrica mb-0" id="resumo-bombas">0</p>
+          </div>
+        </div>
+        <div class="card gc-card">
+          <div class="card-body">
+            <span class="gc-label-apoio">Umidade Média</span>
+            <p class="gc-metrica mb-0" id="resumo-umidade">0%</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="h4 mb-3">Monitoramento em Tempo Real (Simulado)</h2>
+      <div id="lista-cards-painel" class="gc-grid-canteiros"></div>
+    </section>
+  </main>
+
+  <footer class="gc-footer mt-5 py-4">
+    <div class="container text-center">
+      <p class="mb-1"><strong>GotaCerta</strong> — Tecnologia Cidadã para Agricultura Familiar</p>
+      <p class="gc-label-apoio small mb-0">Projeto acadêmico · FATEC Diadema · DSM · 2026</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/registro.js"></script>
+  <script src="js/validacao.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
